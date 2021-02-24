@@ -208,7 +208,7 @@ export default function PersistentDrawerLeft() {
                 </ListItem> 
            </Link>
            <Divider/>
-           <Link to='/Admin'> 
+           <Link to='/AdminMgt'> 
                 <ListItem button key='Admin'> 
                   <ListItemIcon><SupervisedUserCircleIcon fontSize="large"/>
                   </ListItemIcon> 
