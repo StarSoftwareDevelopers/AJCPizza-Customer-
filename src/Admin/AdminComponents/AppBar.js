@@ -31,7 +31,7 @@ import { BrowserRouter, Route, Switch }
   import Home from './../Pages/Home';
   import Menu from './../Pages/Menu';
 
-// import './styles.css';
+import './../Admin.scss';
 
 
 const drawerWidth = 240;
@@ -131,7 +131,7 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap
+          <Typography variant="h4" noWrap
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         className= {classes.title}
@@ -139,7 +139,7 @@ export default function PersistentDrawerLeft() {
             AJC HOMEMADE PIZZA
           </Typography>
           <div>
-            <Typography noWrap 
+            <Typography noWrap variant="h5"
             style={{
               padding: '1rem'
             }}>
@@ -225,10 +225,10 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-
+        <Switch>
           <Route exact path='/admin' component={Home}/> 
           <Route exact path='/Menu' component={Menu}/> 
-    
+        </Switch>
       </main>
     </div>
   );
