@@ -3,11 +3,12 @@ import MUIDataTable from "mui-datatables";
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import {Select,MenuItem} from '@material-ui/core';
+import {Select,FormControl} from '@material-ui/core';
 
 
 const OrderTable = () => {
 
+    const [value, setValue] = React.useState("");
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -31,6 +32,13 @@ const OrderTable = () => {
         });
       };
 
+      //for the select
+      
+      const handleChangeSelect = (event) => {
+        setValue(event.target.value)
+        console.log(value)
+      }
+    
     const columns = ["No.", "Order Date", "Delivery Date", "Order ID","Customer Name","Order Amount","Payment Status","Payment Amount","View Details","Order Status"];
 
     const data = [
@@ -38,25 +46,28 @@ const OrderTable = () => {
     <Button variant="outlined" color="primary">
         View
     </Button>,
-     <Select>
-       <MenuItem value={1}>Completed</MenuItem>
-       <MenuItem value={2}>Preparing</MenuItem>
-       <MenuItem value={3}>On the Way</MenuItem>
-       <MenuItem value={4}>On the Way(Delivered)</MenuItem>
-       <MenuItem value={5}>Completed</MenuItem>
-     </Select>
+     <FormControl>
+      <Select native
+          labelId="select-demo"
+          id="status-select"
+          value={value}
+          displayEmpty
+          onChange={handleChangeSelect}
+        > 
+          <option aria-label="None" value="" disabled/>
+          <option value={1}>Confirmed</option>
+          <option value={2}>Preparing</option>
+          <option value={3}>On the Way</option>
+          <option value={4}>On the Way (Delayed)</option>
+          <option value={5}>Completed</option>
+      </Select>
+    </FormControl>
   ], 
-["2", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
-<Button variant="outlined" color="primary">
-    View
-</Button>,
- <Select>
-       <MenuItem value={1}>Completed</MenuItem>
-       <MenuItem value={2}>Preparing</MenuItem>
-       <MenuItem value={3}>On the Way</MenuItem>
-       <MenuItem value={4}>On the Way(Delivered)</MenuItem>
-       <MenuItem value={5}>Completed</MenuItem>
-</Select>
+  ["2", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
+    <Button variant="outlined" color="primary">
+        View
+    </Button>,
+
 
 ],];
 
