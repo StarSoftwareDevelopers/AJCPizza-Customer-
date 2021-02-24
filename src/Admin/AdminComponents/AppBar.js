@@ -32,6 +32,8 @@ import { BrowserRouter, Route, Switch }
   import Menu from './../Pages/Menu';
 
 import './../Admin.scss';
+import Notifications from '../Pages/Notifications';
+import Orders from '../Pages/Orders';
 
 
 const drawerWidth = 240;
@@ -206,7 +208,7 @@ export default function PersistentDrawerLeft() {
                 </ListItem> 
            </Link>
            <Divider/>
-           <Link to='/Admin'> 
+           <Link to='/AdminMgt'> 
                 <ListItem button key='Admin'> 
                   <ListItemIcon><SupervisedUserCircleIcon fontSize="large"/>
                   </ListItemIcon> 
@@ -246,6 +248,8 @@ export default function PersistentDrawerLeft() {
         <Switch>
           <Route exact path='/admin' component={Home}/> 
           <Route exact path='/Menu' component={Menu}/> 
+          <Route exact path='/Orders' component={Orders}/> 
+          <Route exact path='/Notifications' component={Notifications}/> 
         </Switch>
       </main>
     </div>
