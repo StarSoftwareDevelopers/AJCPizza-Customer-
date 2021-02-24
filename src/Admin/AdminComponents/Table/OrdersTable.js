@@ -1,7 +1,6 @@
 import React from 'react';
 import MUIDataTable from "mui-datatables";
 import Container from '@material-ui/core/Container';
-import { Divider } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 
 import Select from '@material-ui/core/Select';
@@ -38,7 +37,8 @@ const OrderTable = () => {
     ["1", "2/24/2020", "2/25/2020", "12345","Aelin Galathynius","₱130.00","Pending","₱130.00",<Button variant="outlined" color="primary">
     View
   </Button>],
-    ["John Walsh", "Test Corp", "Hartford", "CT","Active", <Select
+    ["John Walsh", "Test Corp", "Hartford", "CT","Active", 
+    <Select
     native
     value={state.age}
     onChange={handleChange}
@@ -58,7 +58,6 @@ const OrderTable = () => {
 
     const options = {
     filterType: 'checkbox',
-    
     };
 
     return (
