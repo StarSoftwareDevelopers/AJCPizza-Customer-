@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './../components/Header';
-//import './style.scss';
+import Footer from './../components/Footer';
 
 const mainLayout = props => {
     return (
@@ -8,6 +8,7 @@ const mainLayout = props => {
             <Header />
             <div className="main">
                 {props.children}
+                <Footer />
             </div>
         </div>
     );
