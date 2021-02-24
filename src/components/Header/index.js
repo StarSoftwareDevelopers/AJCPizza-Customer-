@@ -7,11 +7,22 @@ const Header = props => {
     return (
         <header className="header">
             <div className="wrap">
-                <Link to = "/">
+                
                     <div className="logo">
+                    <Link to = "/">
                         <img src={Logo} alt="AJC Logo" />
+                    </Link>
                     </div>
-                </Link>
+                    <div className="callingAction">
+                        <ul>
+                            <li>
+                                <Link to="/registration">
+                                    Register
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                
             </div>
         </header>
     );
