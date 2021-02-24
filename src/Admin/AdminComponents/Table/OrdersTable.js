@@ -34,27 +34,50 @@ const OrderTable = () => {
     const columns = ["No.", "Order Date", "Delivery Date", "Order ID","Customer Name","Order Amount","Payment Status","Payment Amount","View Details","Order Status"];
 
     const data = [
-    ["1", "2/24/2020", "2/25/2020", "12345","Aelin Galathynius","₱130.00","Pending","₱130.00",<Button variant="outlined" color="primary">
+    ["1", "2/24/2020", "2/25/2020", "12345","Aelin Galathynius","₱130.00","Pending","₱130.00",
+    <Button variant="outlined" color="primary">
+        View
+    </Button>,
+      <Select
+      native
+      value={state.status}
+      onChange={handleChange}
+      inputProps={{
+        name: 'status',
+        id: 'order-status',
+      }}
+    >
+      <option aria-label="Order Status" value="Order Status" />
+      <option value={1}>Confirmed</option>
+      <option value={2}>Preparing</option>
+      <option value={3}>On the Way</option>
+      <option value={4}>On the Way (Delayed)</option>
+      <option value={5}>Delivered</option>
+    </Select>
+  
+], 
+["1", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
+<Button variant="outlined" color="primary">
     View
-  </Button>],
-    ["John Walsh", "Test Corp", "Hartford", "CT","Active", 
-    <Select
-    native
-    value={state.age}
-    onChange={handleChange}
-    inputProps={{
-      name: 'age',
-      id: 'age-native-simple',
-    }}
-  >
-    <option aria-label="None" value="" />
-    <option value={10}>Ten</option>
-    <option value={20}>Twenty</option>
-    <option value={30}>Thirty</option>
-  </Select> ],
-    ["Bob Herm", "Test Corp", "Tampa", "FL","Active"],
-    ["James Houston", "Test Corp", "Dallas", "TX","Active"],
-    ];
+</Button>,
+  <Select
+  native
+  value={state.status}
+  onChange={handleChange}
+  inputProps={{
+    name: 'status',
+    id: 'order-status',
+  }}
+>
+  <option aria-label="Order Status" value="Order Status" />
+  <option value={1}>Confirmed</option>
+  <option value={2}>Preparing</option>
+  <option value={3}>On the Way</option>
+  <option value={4}>On the Way (Delayed)</option>
+  <option value={5}>Delivered</option>
+</Select>
+
+],];
 
     const options = {
     filterType: 'checkbox',
