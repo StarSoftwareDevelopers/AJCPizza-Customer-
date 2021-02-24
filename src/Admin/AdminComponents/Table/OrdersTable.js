@@ -56,7 +56,7 @@ const OrderTable = () => {
     </Select>
   
 ], 
-["1", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
+["2", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
 <Button variant="outlined" color="primary">
     View
 </Button>,
