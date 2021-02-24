@@ -15,7 +15,7 @@ const Home = () => {
               margin: "5px"
           }}>
             <ThemeProvider theme={theme}>
-                <Typography variant="h4" style={{
+                <Typography variant="h5" style={{
                     textAlign: "left",
                     marginTop: "-20px",
                     marginBottom: "1rem"
