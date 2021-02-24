@@ -1,12 +1,6 @@
 import React from 'react';
 import './style.scss';
-import {
-    HeroItems,
-    HeroP,
-    HeroBtn,
-    HeroContent,
-    HeroH1
-} from './Elements';
+
 import PizzaWelcome from './../../assets/pizzacarousel.png';
 const Directory = props => {
     return (
@@ -22,7 +16,7 @@ const Directory = props => {
                 <items>
                 <h1>AJC Homemade Pizza</h1>
                 <p>The Best & Mouth-watering Pizza in Ayala</p>
-                <btn>Order Now</btn>
+                <a>Order Now</a>
                 </items>
             </content>
                 </div>
