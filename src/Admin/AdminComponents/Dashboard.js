@@ -101,11 +101,12 @@ export default function Dashboard() {
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button size="medium">
-                    <Typography variant="h6" component="h2" >
-                        View All
-                    </Typography>
-                </Button>
+                <Link to="/Orders">
+                    <Button size="medium"> 
+                        <Typography variant="h6" component="h2" >
+                            View All
+                        </Typography></Button>
+                </Link>
                 </CardActions>      
             </Card>
       </Grid>
