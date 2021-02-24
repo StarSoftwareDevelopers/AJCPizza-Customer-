@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
+
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -167,52 +168,68 @@ export default function PersistentDrawerLeft() {
         <List>
           <Link to='/admin'>  
                 <ListItem button key='Home'> 
-                  <ListItemIcon><HomeIcon/> 
+                  <ListItemIcon><HomeIcon fontSize="large"/> 
                   </ListItemIcon> 
-                  <ListItemText primary='Home' /> 
+                  <ListItemText>
+                    <Typography variant="h5">
+                      Home
+                    </Typography>
+                  </ListItemText>
                 </ListItem>  
             </Link> 
           <Link to='/Menu'> 
                 <ListItem button key='Menu'> 
-                  <ListItemIcon><MenuBookIcon/> 
+                  <ListItemIcon><MenuBookIcon fontSize="large"/> 
                   </ListItemIcon> 
-                  <ListItemText primary='Menu' /> 
+                  <Typography variant="h5">
+                      Menu
+                    </Typography> 
                 </ListItem> 
           </Link>
           <Link to='/Orders'> 
                 <ListItem button key='Orders'> 
-                  <ListItemIcon><ShoppingCartIcon/> 
+                  <ListItemIcon><ShoppingCartIcon fontSize="large"/> 
                   </ListItemIcon> 
-                  <ListItemText primary='Orders' /> 
+                    <Typography variant="h5">
+                        Orders
+                    </Typography> 
                 </ListItem> 
            </Link>  
            <Link to='/Notifications'> 
                 <ListItem button key='Notifications'> 
-                  <ListItemIcon><NotificationsIcon/>
+                  <ListItemIcon><NotificationsIcon fontSize="large"/>
                   </ListItemIcon> 
-                  <ListItemText primary='Notifications' /> 
+                  <Typography variant="h5">
+                      Notifications
+                    </Typography>
                 </ListItem> 
            </Link>
            <Divider/>
            <Link to='/Admin'> 
                 <ListItem button key='Admin'> 
-                  <ListItemIcon><SupervisedUserCircleIcon/>
+                  <ListItemIcon><SupervisedUserCircleIcon fontSize="large"/>
                   </ListItemIcon> 
-                  <ListItemText primary='Admin' /> 
+                  <Typography variant="h5">
+                      Admin
+                    </Typography> 
                 </ListItem> 
            </Link>
            <Link to='/Staff'> 
                 <ListItem button key='Staff'> 
-                  <ListItemIcon><GroupIcon/>
+                  <ListItemIcon><GroupIcon fontSize="large"/>
                   </ListItemIcon> 
-                  <ListItemText primary='Staff' /> 
+                  <Typography variant="h5">
+                      Staff
+                    </Typography>
                 </ListItem> 
            </Link>
            <Link to='/Users'> 
                 <ListItem button key='Users'> 
-                  <ListItemIcon><PeopleOutlineIcon/>
+                  <ListItemIcon><PeopleOutlineIcon fontSize="large"/>
                   </ListItemIcon> 
-                  <ListItemText primary='Users' /> 
+                  <Typography variant="h5">
+                      Users
+                    </Typography>
                 </ListItem> 
            </Link>
         </List>
