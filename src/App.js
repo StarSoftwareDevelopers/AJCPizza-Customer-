@@ -7,6 +7,7 @@ import HomeLayout from  './layout/HomeLayout';
 
 import Homepage from './pages/Homepage';
 import Registration from './pages/Registration';
+import Login from './pages/Login';
 
 import AppBar from './Admin/AdminComponents/AppBar';
 import Home from './Admin/Pages/Home';
@@ -28,6 +29,11 @@ function App() {
           <Route exact path='/registration' render={() => (
             <MainLayout>
               <Registration />
+            </MainLayout>
+          )}/> 
+           <Route exact path='/login' render={() => (
+            <MainLayout>
+              <Login />
             </MainLayout>
           )}/> 
           <AppBar/>

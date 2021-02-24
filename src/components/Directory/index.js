@@ -15,7 +15,7 @@ const Directory = props => {
                         <content>
                 <items>
                 <h1>AJC Homemade Pizza</h1>
-                <p>The Best & Mouth-watering Pizza in Ayala</p>
+                <p>The Best Pizza in Ayala</p>
                 <a>Order Now</a>
                 </items>
             </content>
