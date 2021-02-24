@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import Select from '@material-ui/core/Select';
+import {Select,MenuItem} from '@material-ui/core';
 
 
 const OrderTable = () => {
@@ -38,43 +38,24 @@ const OrderTable = () => {
     <Button variant="outlined" color="primary">
         View
     </Button>,
-      <Select
-      native
-      value={state.status}
-      onChange={handleChange}
-      inputProps={{
-        name: 'status',
-        id: 'order-status',
-      }}
-    >
-      <option aria-label="Order Status" value="Order Status" />
-      <option value={1}>Confirmed</option>
-      <option value={2}>Preparing</option>
-      <option value={3}>On the Way</option>
-      <option value={4}>On the Way (Delayed)</option>
-      <option value={5}>Delivered</option>
-    </Select>
-  
-], 
+     <Select>
+       <MenuItem value={1}>Completed</MenuItem>
+       <MenuItem value={2}>Preparing</MenuItem>
+       <MenuItem value={3}>On the Way</MenuItem>
+       <MenuItem value={4}>On the Way(Delivered)</MenuItem>
+       <MenuItem value={5}>Completed</MenuItem>
+     </Select>
+  ], 
 ["2", "2/24/2020", "2/25/2020", "12346","Rowan Whitethorn","₱130.00","Pending","₱130.00",
 <Button variant="outlined" color="primary">
     View
 </Button>,
-  <Select
-  native
-  value={state.status}
-  onChange={handleChange}
-  inputProps={{
-    name: 'status',
-    id: 'order-status',
-  }}
->
-  <option aria-label="Order Status" value="Order Status" />
-  <option value={1}>Confirmed</option>
-  <option value={2}>Preparing</option>
-  <option value={3}>On the Way</option>
-  <option value={4}>On the Way (Delayed)</option>
-  <option value={5}>Delivered</option>
+ <Select>
+       <MenuItem value={1}>Completed</MenuItem>
+       <MenuItem value={2}>Preparing</MenuItem>
+       <MenuItem value={3}>On the Way</MenuItem>
+       <MenuItem value={4}>On the Way(Delivered)</MenuItem>
+       <MenuItem value={5}>Completed</MenuItem>
 </Select>
 
 ],];
