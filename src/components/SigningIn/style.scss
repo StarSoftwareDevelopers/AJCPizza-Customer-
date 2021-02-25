@@ -1,0 +1,22 @@
+.signin{
+    display: block;
+    width: 100%;
+    max-width: 40.0rem;
+    margin: 4rem auto 6rem ;   
+    border: 1px solid black;
+
+    .wrap{
+        padding: 10px;
+    }
+
+    //css fro Typography
+    .font{
+        margin: 0 auto;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    .socialSignin{
+        margin: 3rem auto 0;
+    }
+}

@@ -14,7 +14,6 @@ import Home from './Admin/Pages/Home';
 
 import './default.scss';
 
-
 function App() {
   return (
     <div className="App">
