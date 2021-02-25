@@ -15,7 +15,7 @@ theme.typography.h2 = {
   [theme.breakpoints.up('md')]: {
     fontSize: '2rem',
   },
-},
+}
 theme.typography.h6= {
     fontSize: '1rem',
     '@media (min-width:600px)': {
