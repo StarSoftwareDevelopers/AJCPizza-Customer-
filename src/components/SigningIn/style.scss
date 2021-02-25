@@ -4,9 +4,16 @@
     max-width: 40.0rem;
     margin: 4rem auto 6rem ;   
     border: 1px solid black;
+    
+    
 
     .wrap{
         padding: 10px;
+
+        .formWrap{
+            margin: 1rem auto 0;
+    
+        }
     }
 
     //css fro Typography
@@ -14,6 +21,9 @@
         margin: 0 auto .5rem;
         padding: 0;
         text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3.0rem;
+
     }
 
     span{
@@ -22,5 +32,20 @@
 
     .socialSignin{
         margin: .5rem auto 1.5rem;
+        
     }
+
+    h6 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+    }
+
+    h2 {
+        margin: 0 auto .5rem;
+        padding: 0;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3.0rem;
+    }
+    
 }
