@@ -3,7 +3,7 @@ import './style.scss';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from './../Forms/Button';
-import { signInWithGoogle } from './../../firebase/utils';
+import { signInWithGoogle,signInWithFacebook } from './../../firebase/utils';
 
 //responsive font size that only covers around the ThemeProvider or you can omit the typography and the material-ui here
 const theme = createMuiTheme();
@@ -44,6 +44,7 @@ class SigninIn extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <div className="socialSignin">
                                     <div className="row">
+                                        
                                         {/* Put an google Icon after the <Button> */}
                                         <Button onClick={signInWithGoogle}>
                                             <Typography variant="h6" align="center" display="block">

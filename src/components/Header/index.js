@@ -3,6 +3,7 @@ import Logo from './../../assets/AJC Pizza Logo.png';
 import './style.scss';
 import {Link} from 'react-router-dom';
 import { auth } from './../../firebase/utils';
+import { Button } from '@material-ui/core';
 
 const Header = props => {
 
@@ -24,9 +25,11 @@ const Header = props => {
                         {currentUser && (
                             <ul>
                                 <li>
-                                    <span onClick={() => auth.signOut()}>
+                                    {/* You can change the Button to <span> based from the video. Button is taken
+                                    from material UI */}
+                                    <Button size="medium" onClick={() => auth.signOut()}>
                                         LogOut
-                                    </span>
+                                    </Button>
                                 </li>
                             </ul>
                         )}
