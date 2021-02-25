@@ -1,14 +1,25 @@
-.btn{
-    //just chage the color and background color to match it w/ the website
-    display: block;
+.butn {
     width: 100%;
-    color: white;
-    background: #BB001B;
-    font-weight: 300;
-    margin: 0;
     padding: 1rem 0;
+    margin: 0 auto;
     border: 0;
-    border-radius: 12px;
     outline: none;
-    cursor: pointer;
+    display: block;
+    background: #e31837;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+
+    &:hover {
+        background: #ffc500;
+        transition: 0.1s ease-out;
+        color: #000;
+        cursor: pointer;
+    }
+
+
+
 }
