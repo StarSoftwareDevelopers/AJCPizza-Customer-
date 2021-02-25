@@ -5,6 +5,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from './../Forms/Button';
 import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
+import {Link} from 'react-router-dom';
 
 //responsive font size that only covers around the ThemeProvider or you can omit the typography and the material-ui here
 const theme = createMuiTheme();
@@ -115,6 +116,12 @@ class SigninIn extends Component {
                                             </Button>
                                         </div>
                                     </div>
+
+                                    <Link to="/registration">
+                                        <Typography variant="h6" align="center" display="block">
+                                        Not yet Registered? Register here.
+                                        </Typography>
+                                    </Link>
                             </form>
                         </div>
                     </ThemeProvider>
