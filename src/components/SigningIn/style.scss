@@ -1,28 +1,26 @@
-.signin {
+.signin{
+    display: block;
     width: 100%;
     max-width: 40.0rem;
+    margin: 4rem auto 6rem ;   
     border: 1px solid black;
-    margin: 4rem auto 6rem;
-    display: block;
 
-    .wrap {
+    .wrap{
         padding: 10px;
+    }
 
-        h2 {
-            line-height: 1;
-            display: block;
-            width: 100%;
-            text-transform: uppercase;
-            font-weight: 400;
-            font-size: 2.2rem;
-            text-align: center;
-            margin: 0 auto;
-            padding: 0;
-        }
+    //css fro Typography
+    .font{
+        margin: 0 auto;
+        padding: 0;
+        text-transform: uppercase;
+    }
 
-        .socialSigningIn {
-            margin-top: 3rem;
-            
-        }
+    span{
+        cursor: pointer;
+    }
+
+    .socialSignin{
+        margin: 3rem auto 0;
     }
 }

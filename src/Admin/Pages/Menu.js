@@ -2,6 +2,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Link} from 'react-router-dom';
 import './../Admin.scss';
+import Card from '@material-ui/core/Card';
 
 const Menu = () => {
     return ( 
@@ -18,6 +19,9 @@ const Menu = () => {
                   <Link to ="#">
                     <Typography variant="h5" style={{display: 'inline-block'}}>| PromoCode</Typography>  
                 </Link>
+                <Card>
+                  JUST TRYING IF IT COULD MERGE
+                </Card>
     </Container>
      );
 }
