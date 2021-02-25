@@ -11,6 +11,7 @@ export const firestore = firebase.firestore();
 
 //utility function for the onclick event with the Sign in of Google button
 const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
 
 export const handleUserProfile = async (userAuth, additionalData) => {
