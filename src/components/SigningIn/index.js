@@ -124,11 +124,11 @@ class SigninIn extends Component {
                                         </Link>
                                     </Typography>
 
-                                    <Link to="/registration">
+                                    {/* <Link to="/registration">
                                         <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
                                         Not yet Registered? Register here.
                                         </Typography>
-                                    </Link>
+                                    </Link> */}
                             </form>
                         </div>
             </WrapAuth>
