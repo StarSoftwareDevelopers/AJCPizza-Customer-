@@ -29,6 +29,7 @@ class Signup extends Component {
     this.handleChange=this.handleChange.bind(this);
   }
 
+
   handleChange(e) {
     const { name, value } = e.target;
 
@@ -61,7 +62,7 @@ class Signup extends Component {
       });
 
      }catch(err){
-       console.log(err);
+       alert(err);
      }
   }
 
@@ -105,16 +106,16 @@ class Signup extends Component {
                           placeholder="Email"
                           onChange={this.handleChange}
                        />
+                  
                        <FormInput
                           type="password"
                           name="password"
                           value={password}
                           placeholder="Password"
                           onChange={this.handleChange}
-                          pattern=".{6}"
                           title="Password should be at least 6 characters long"
                        /> 
-                      
+                 
                         <FormInput
                           type="password"
                           name="confirmPassword"

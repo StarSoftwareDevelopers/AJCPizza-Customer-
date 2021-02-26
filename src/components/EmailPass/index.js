@@ -4,10 +4,23 @@ import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
-import Alert from '@material-ui/lab/Alert';
+
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import { auth } from './../../firebase/utils';
 import { Typography } from '@material-ui/core';
+
+const theme = createMuiTheme();
+
+theme.typography.h6 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.4rem',
+  },
+};
 
 const initialState = {
     email: '',
@@ -71,6 +84,7 @@ class EmailPass extends Component {
 
         return (
             <WrapAuth {...configAuth}>
+                <ThemeProvider theme={theme}>
                 <Typography variant="body1" align="center">
                     Enter your email and we'll send you a link to reset your password
                 </Typography>
@@ -99,10 +113,13 @@ class EmailPass extends Component {
                         />
 
                         <Button type="submit">
-                            Reset Password
+                            <Typography variant="h6">
+                                Reset Password
+                            </Typography>
                         </Button>
                     </form>
                 </div>
+                </ThemeProvider>
             </WrapAuth>
         );
     }

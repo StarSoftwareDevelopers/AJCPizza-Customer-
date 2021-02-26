@@ -8,7 +8,6 @@ const Homepage = props => {
     return (
 
         <section className="homepage">
-            
             <Directory />
         </section>
     );
