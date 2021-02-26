@@ -27,9 +27,9 @@ const Header = props => {
                                 <li>
                                     {/* You can change the Button to <span> based from the video. Button is taken
                                     from material UI */}
-                                    <Button size="medium" onClick={() => auth.signOut()}>
-                                        LogOut
-                                    </Button>
+                                    <span onClick={() => auth.signOut()}>
+                                        Logout
+                                    </span>
                                 </li>
                             </ul>
                         )}
