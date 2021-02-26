@@ -43,7 +43,7 @@ class SigninIn extends Component {
                 });
             })
             .catch(()=> {
-                const err = ['Wrong Email or Password'];
+                const err = ['Wrong Email or Password. Please try again.'];
                 this.setState({
                     errors: err
                 }); 
