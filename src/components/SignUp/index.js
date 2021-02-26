@@ -62,7 +62,7 @@ class Signup extends Component {
       });
 
      }catch(err){
-       console.log(err);
+       alert(err);
      }
   }
 
@@ -113,7 +113,6 @@ class Signup extends Component {
                           value={password}
                           placeholder="Password"
                           onChange={this.handleChange}
-                          pattern=".{6}"
                           title="Password should be at least 6 characters long"
                        /> 
                  

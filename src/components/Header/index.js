@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Logo from './../../assets/AJC Pizza Logo.png';
 import './style.scss';
 import {Link} from 'react-router-dom';
 import { auth } from './../../firebase/utils';
-import { Button } from '@material-ui/core';
 
 const Header = props => {
 
@@ -13,13 +13,11 @@ const Header = props => {
     return (
         <header className="header">
             <div className="wrap">
-                
                     <div className="logo">
                     <Link to = "/">
                         <img src={Logo} alt="AJC Logo" />
                     </Link>
                     </div>
-
                     <div className="callingAction">
 
                         {currentUser && (
@@ -60,4 +58,8 @@ Header.defaultProps = {
     currentUser: null
 };
 
-export default Header;
+const mapStateToProps = ({ user }) => ({
+    currentUser: user.currentUser
+});
+
+export default connect(mapStateToProps, null)(Header);
