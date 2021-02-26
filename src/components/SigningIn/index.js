@@ -9,7 +9,8 @@ import WrapAuth from './../WrapAuth';
 
 const initialState = {
     email: '',
-    password: ''
+    password: '',
+    errors: []
 };
 
 class SigninIn extends Component {
@@ -35,19 +36,28 @@ class SigninIn extends Component {
 
         try{
           
-            await auth.signInWithEmailAndPassword(email,password);
-            this.setState({
-                ...initialState
+            await auth.signInWithEmailAndPassword(email,password)
+            .then(()=> {
+                this.setState({
+                    ...initialState
+                });
+            })
+            .catch(()=> {
+                const err = ['Wrong Email or Password'];
+                this.setState({
+                    errors: err
+                }); 
             });
+           
             
         }catch(err){
-            console.log(err);
+            console.log
         }
     }
 
     render() {
 
-        const { email, password} = this.state;
+        const { email, password, errors} = this.state;
 
         const configAuth ={
             headLine: 'Log In'
@@ -56,6 +66,19 @@ class SigninIn extends Component {
         return (
             <WrapAuth {...configAuth} >
                         <div className="formWrap">
+
+                            
+                    {errors.length > 0 && (
+                        <Typography color="error" align="center">
+                            {errors.map((e, index) => {
+                                return (
+                                    <li key={index} style={{listStyleType: "none"}}>
+                                        {e}
+                                    </li>
+                                );
+                            })}
+                        </Typography>
+                    )}
                             <form onSubmit={this.handleSubmit}>
 
                                 <FormInput  
@@ -95,8 +118,14 @@ class SigninIn extends Component {
                                         </div>
                                     </div>
 
+                                    <Typography align="center" variant="subtitle1" display="block">
+                                        <Link to="/recovery">
+                                            Forgot Password?
+                                        </Link>
+                                    </Typography>
+
                                     <Link to="/registration">
-                                        <Typography variant="h6" align="center" display="block">
+                                        <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
                                         Not yet Registered? Register here.
                                         </Typography>
                                     </Link>

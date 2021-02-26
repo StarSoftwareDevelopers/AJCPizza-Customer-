@@ -79,15 +79,15 @@ class Signup extends Component {
                     
                   {/* Render any errors */}
                   {errors.length > 0 && (
-                    <ul>
+                     <Typography color="error" align="center">
                       {errors.map((err,index) => {
                         return(
-                          <li key={index}>
+                          <li key={index} style={{listStyleType: "none"}}>
                             {err}
                           </li>
                         )
                       })}
-                    </ul>
+                    </Typography>
                   )}
 
                     <form onSubmit={this.handleFormSubmit}>

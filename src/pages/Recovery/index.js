@@ -1,12 +1,9 @@
 import React from 'react';
 import './styles.scss';
+import EmailPass from './../../components/EmailPass';
 
 const Recover = props => {
-    return ( 
-        <div>
-            <h1>Email Password</h1>
-        </div>
-     );
+    return <EmailPass/>
 }
  
 export default Recover;
