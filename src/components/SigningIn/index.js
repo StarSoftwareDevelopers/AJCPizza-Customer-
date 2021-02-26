@@ -1,32 +1,11 @@
 import React,{Component} from 'react';
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from './../Forms/Button';
 import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
 import {Link} from 'react-router-dom';
-
-//responsive font size that only covers around the ThemeProvider or you can omit the typography and the material-ui here
-const theme = createMuiTheme();
-theme.typography.h2 = {
-  fontSize: '1.2rem',
-  '@media (min-width:600px)': {
-    fontSize: '1.5rem',
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '2rem',
-  },
-}
-theme.typography.h6= {
-    fontSize: '1rem',
-    '@media (min-width:600px)': {
-      fontSize: '1rem',
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: '12px',
-    },
-};
+import WrapAuth from './../WrapAuth';
 
 const initialState = {
     email: '',
@@ -70,13 +49,12 @@ class SigninIn extends Component {
 
         const { email, password} = this.state;
 
+        const configAuth ={
+            headLine: 'Log In'
+        }
+
         return (
-            <div className="signin">
-                <div className="wrap">
-                    <ThemeProvider theme = {theme}>
-                        <Typography variant="h2" align="center" display="block" className="font">
-                            Log In
-                        </Typography>
+            <WrapAuth {...configAuth} >
                         <div className="formWrap">
                             <form onSubmit={this.handleSubmit}>
 
@@ -124,9 +102,7 @@ class SigninIn extends Component {
                                     </Link>
                             </form>
                         </div>
-                    </ThemeProvider>
-                </div>
-            </div>
+            </WrapAuth>
         )
     }
    

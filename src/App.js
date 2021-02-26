@@ -2,11 +2,15 @@ import React,{Component} from 'react';
 import { BrowserRouter, Route, Switch, Redirect } 
   from 'react-router-dom'; 
 
+
+  //layout
 import MainLayout from  './layout/mainLayout';
 import HomeLayout from  './layout/HomeLayout';
 
+//pages
 import Homepage from './pages/Homepage';
 import Registration from './pages/Registration';
+import Recovery from './pages/Recovery';
 import Login from './pages/Login';
 
 import AppBar from './Admin/AdminComponents/AppBar';
@@ -77,6 +81,12 @@ class App extends Component {
                   <Login />
                 </MainLayout>
               )}/> 
+              <Route exact path='/recovery' render={() => (
+                <MainLayout>
+                  <Recovery/>
+                </MainLayout>
+              )}/>      
+              
             <AppBar/>
             <Route exact path="admin" component={Home}/>
            
