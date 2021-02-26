@@ -4,11 +4,11 @@ import './styles.scss';
 import { auth, handleUserProfile } from './../../firebase/utils';
 
 import Typography from '@material-ui/core/Typography';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import FormInput from './../Forms/FormInput';
 import Button from './../Forms/Button';
+
+import WrapAuth from './../WrapAuth';
 
 const initialSate = {
   displayName: '',
@@ -16,17 +16,6 @@ const initialSate = {
   password: '',
   confirmPassword: '',
   errors: []
-};
-
-const theme = createMuiTheme();
-theme.typography.h2 = {
-  fontSize: '1rem',
-  '@media (min-width:600px)': {
-    fontSize: '1.5rem',
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '2rem',
-  },
 };
 
 class Signup extends Component {
@@ -80,29 +69,27 @@ class Signup extends Component {
 
         const { displayName, email, password, confirmPassword, errors} = this.state;
 
-        return(
-            <div className="signup">
-                <div className="wrap">
-                    <ThemeProvider theme={theme}>
-                      <Typography variant="h2" align="center" display="block">
-                             Sign Up
-                        </Typography>
-                    </ThemeProvider>
+        const configAuth = {
+          headLine : 'Registration'
+        }
 
+        return(
+            <WrapAuth {...configAuth}>
+                  <div className="formWrap">
+                    
                   {/* Render any errors */}
                   {errors.length > 0 && (
-                    <ul>
+                     <Typography color="error" align="center">
                       {errors.map((err,index) => {
                         return(
-                          <li key={index}>
+                          <li key={index} style={{listStyleType: "none"}}>
                             {err}
                           </li>
                         )
                       })}
-                    </ul>
+                    </Typography>
                   )}
 
-                  <div className="formWrap">
                     <form onSubmit={this.handleFormSubmit}>
                        <FormInput
                           type="text"
@@ -124,7 +111,10 @@ class Signup extends Component {
                           value={password}
                           placeholder="Password"
                           onChange={this.handleChange}
+                          pattern=".{6}"
+                          title="Password should be at least 6 characters long"
                        /> 
+                      
                         <FormInput
                           type="password"
                           name="confirmPassword"
@@ -141,8 +131,7 @@ class Signup extends Component {
                        </Button>
                     </form>
                     </div>
-                </div>
-            </div>
+            </WrapAuth>
         );
     }
 }
