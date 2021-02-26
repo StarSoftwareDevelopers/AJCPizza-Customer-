@@ -118,12 +118,11 @@ class SigninIn extends Component {
                                         </div>
                                     </div>
 
-                                    <Typography align="center" variant="subtitle1" display="block">
-                                        <Link to="/recovery">
+                                    <Link to="/recovery">
+                                        <Typography align="center" variant="subtitle1" display="block">
                                             Forgot Password?
-                                        </Link>
-                                    </Typography>
-
+                                        </Typography>
+                                    </Link>
                                     {/* <Link to="/registration">
                                         <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
                                         Not yet Registered? Register here.
