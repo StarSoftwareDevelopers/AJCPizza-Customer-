@@ -23,6 +23,16 @@ const Header = props => {
                         {currentUser && (
                             <ul>
                                 <li>
+                                    <Link to="/dashboardC">
+                                        Order Status
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/account">
+                                        My Account
+                                    </Link>
+                                </li>
+                                <li>
                                     {/* You can change the Button to <span> based from the video. Button is taken
                                     from material UI */}
                                     <span onClick={() => auth.signOut()}>

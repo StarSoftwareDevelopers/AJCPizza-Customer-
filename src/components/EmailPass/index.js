@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{ useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import './styles.scss';
 import WrapAuth from './../WrapAuth';
@@ -22,34 +22,14 @@ theme.typography.h6 = {
   },
 };
 
-const initialState = {
-    email: '',
-    errors: []
-};
+const EmailPass = props => {
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
 
-class EmailPass extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            ...initialState
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e){
-        const { name, value} = e.target;
-        this.setState ({
-            [name] : value
-        });
-    };
-
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         try{
-            const{ email } = this.state;
-
             //the page you want to send the user to once they've reset the password
             //pass the url for the live site or the domain site when the site has gone live 
             const config = {
@@ -59,24 +39,18 @@ class EmailPass extends Component {
             await auth.sendPasswordResetEmail(email, config)
                 //specify what happens if successful
                 .then(() => {
-                    this.props.history.push('/login');
+                    alert('Password reset successful. Please check your email');
+                    props.history.push('/login');
                 })
                 .catch(() => {
                     const err = ['Email does not exist. Please try again'];
-                    this.setState({
-                        errors: err
-                    });
+                    setErrors(err);
                 });
 
         }catch(err){
             console.log(err);
         }
     }
-
-
-    render() {
-
-        const { email, errors } = this.state;
 
         const configAuth ={
             headLine: 'Forgot your password?'
@@ -102,14 +76,14 @@ class EmailPass extends Component {
                         </Typography>
                     )}
 
-                    <form onSubmit = {this.handleSubmit}>
+                    <form onSubmit = {handleSubmit}>
 
                         <FormInput
                             type="email"
                             name="email"
                             value={email}
                             placeholder="Email"
-                            onChange={this.handleChange}
+                            handleChange={e => setEmail(e.target.value)}
                         />
 
                         <Button type="submit">
@@ -123,6 +97,6 @@ class EmailPass extends Component {
             </WrapAuth>
         );
     }
-}
+
 
 export default withRouter(EmailPass);

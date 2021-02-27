@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
+import { withRouter } from 'react-router-dom';
 import './styles.scss';
 
 import { auth, handleUserProfile } from './../../firebase/utils';
@@ -10,44 +11,28 @@ import Button from './../Forms/Button';
 
 import WrapAuth from './../WrapAuth';
 
-const initialSate = {
-  displayName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  errors: []
-};
+const Signup = props => {
+  const [displayName, setdisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState([]);
 
-class Signup extends Component {
+  const reset = () => {
+    setdisplayName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setErrors([]);
+  };
 
-  constructor(props){
-    super(props);
-    this.state = {
-      ...initialSate
-    };
-
-    this.handleChange=this.handleChange.bind(this);
-  }
-
-
-  handleChange(e) {
-    const { name, value } = e.target;
-
-    this.setState({
-     [name] : value 
-    });
-  }
-
-  handleFormSubmit = async event => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
-    const { displayName, email, password, confirmPassword} = this.state;
 
     //validation for password and confirmPassword
      if( password !== confirmPassword) {
        const err =['Password does not match'];
-       this.setState({
-        errors :  err
-       });
+       setErrors(err);
        return;
      }
 
@@ -56,19 +41,14 @@ class Signup extends Component {
       const { user } = await auth.createUserWithEmailAndPassword(email,password);
       // await user.sendEmailVerification();
       await handleUserProfile(user, { displayName});
-
-      this.setState({
-        ...initialSate
-      });
+      reset();
+      props.history.push('/');//access to history and possible due to withRouter
 
      }catch(err){
        alert(err);
      }
   }
 
-    render(){
-
-        const { displayName, email, password, confirmPassword, errors} = this.state;
 
         const configAuth = {
           headLine : 'Registration'
@@ -91,20 +71,20 @@ class Signup extends Component {
                     </Typography>
                   )}
 
-                    <form onSubmit={this.handleFormSubmit}>
+                    <form onSubmit={handleFormSubmit}>
                        <FormInput
                           type="text"
                           name="displayName"
                           value={displayName}
                           placeholder="Full Name"
-                          onChange={this.handleChange}
+                          handleChange = {e => setdisplayName(e.target.value)}
                        />
                         <FormInput
                           type="email"
                           name="email"
                           value={email}
                           placeholder="Email"
-                          onChange={this.handleChange}
+                          handleChange = {e => setEmail(e.target.value)}
                        />
                   
                        <FormInput
@@ -112,7 +92,7 @@ class Signup extends Component {
                           name="password"
                           value={password}
                           placeholder="Password"
-                          onChange={this.handleChange}
+                          handleChange = {e => setPassword(e.target.value)}
                           title="Password should be at least 6 characters long"
                        /> 
                  
@@ -121,7 +101,7 @@ class Signup extends Component {
                           name="confirmPassword"
                           value={confirmPassword}
                           placeholder="Confirm Password"
-                          onChange={this.handleChange}
+                          handleChange = {e => setConfirmPassword(e.target.value)}
                        />
 
                        <Button type="submit">
@@ -135,6 +115,6 @@ class Signup extends Component {
             </WrapAuth>
         );
     }
-}
 
-export default Signup;
+
+export default withRouter(Signup);

@@ -1,52 +1,34 @@
-import React,{Component} from 'react';
+import React,{ useState } from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
 import Button from './../Forms/Button';
 import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
-import {Link} from 'react-router-dom';
 import WrapAuth from './../WrapAuth';
 
-const initialState = {
-    email: '',
-    password: '',
-    errors: []
-};
+const SigninIn = props => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
 
-class SigninIn extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            ...initialState
-        };
+    const resetForm = () =>{
+        setEmail('');
+        setPassword('');
+        setErrors([]);
+    };
 
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e) {
-        const { name, value } = e.target;
-        this.setState({
-            [name] : value
-        });
-    }
-
-    handleSubmit = async e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        const { email, password } = this.state;
-
         try{
-          
             await auth.signInWithEmailAndPassword(email,password)
             .then(()=> {
-                this.setState({
-                    ...initialState
-                });
+              resetForm();
+              props.history.push('/');
             })
             .catch(()=> {
                 const err = ['Wrong Email or Password. Please try again.'];
-                this.setState({
-                    errors: err
-                }); 
+                setErrors(err);
             });
            
             
@@ -55,19 +37,14 @@ class SigninIn extends Component {
         }
     }
 
-    render() {
-
-        const { email, password, errors} = this.state;
-
-        const configAuth ={
-            headLine: 'Log In'
-        }
+    const configAuth ={
+        headLine: 'Log In'
+    }
 
         return (
             <WrapAuth {...configAuth} >
                         <div className="formWrap">
-
-                            
+      
                     {errors.length > 0 && (
                         <Typography color="error" align="center">
                             {errors.map((e, index) => {
@@ -79,14 +56,14 @@ class SigninIn extends Component {
                             })}
                         </Typography>
                     )}
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={handleSubmit}>
 
                                 <FormInput  
                                     type="email"
                                     name="email"
                                     value={email}
                                     placeholder="Email"
-                                    handleChange = {this.handleChange}
+                                    handleChange = {e => setEmail(e.target.value)}
                                 />
 
                                 
@@ -95,7 +72,7 @@ class SigninIn extends Component {
                                     name="password"
                                     value={password}
                                     placeholder="Password"
-                                    handleChange = {this.handleChange}
+                                    handleChange = {e => setPassword(e.target.value)}
                                 />          
 
                                 <Button type="submit">
@@ -131,9 +108,7 @@ class SigninIn extends Component {
                             </form>
                         </div>
             </WrapAuth>
-        )
+        );
     }
-   
-}
 
-export default SigninIn;
+export default withRouter(SigninIn);
