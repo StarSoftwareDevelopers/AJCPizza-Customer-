@@ -51,7 +51,7 @@ class SigninIn extends Component {
            
             
         }catch(err){
-            console.log
+            console.log(err);
         }
     }
 
