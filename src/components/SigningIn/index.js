@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { emailSignInStart, googleSignInStart } from './../../Redux/User/user.actions';
 
 import './style.scss';
@@ -15,8 +15,9 @@ const mapState = ({ user }) => ({
 }); //to get from the redux store 
 
 const SigninIn = props => {
-    const { currentUser } = useSelector(mapState);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const { currentUser } = useSelector(mapState);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
@@ -25,7 +26,7 @@ const SigninIn = props => {
         //whenever signinsuccess is true
         if (currentUser) {
             resetForm();
-            props.history.push('/');
+            history.push('/');
         }
 
     },[currentUser]); 
@@ -115,4 +116,4 @@ const SigninIn = props => {
         );
     }
 
-export default withRouter(SigninIn);
+export default SigninIn;

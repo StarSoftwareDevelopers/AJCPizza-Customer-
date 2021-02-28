@@ -1,6 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { resetPassStart, resetStateUser } from './../../Redux/User/user.actions';
 import './styles.scss';
 import WrapAuth from './../WrapAuth';
@@ -28,8 +28,9 @@ const mapState = ({ user}) => ({
 });
 
 const EmailPass = props => {
-    const { resetPassSuccess, errorUser } = useSelector(mapState);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const { resetPassSuccess, errorUser } = useSelector(mapState);
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState([]);
 
@@ -37,7 +38,7 @@ const EmailPass = props => {
         if(resetPassSuccess) {
             alert('Password reset successful. Please check your email');
             dispatch(resetStateUser());
-            props.history.push('/login');
+            history.push('/login');
         }
     },[resetPassSuccess]);
 
@@ -100,4 +101,4 @@ const EmailPass = props => {
     }
 
 
-export default withRouter(EmailPass);
+export default EmailPass;

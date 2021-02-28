@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { signUpStart } from './../../Redux/User/user.actions';
 
 import './styles.scss';
@@ -16,8 +16,9 @@ const mapState = ({ user }) => ({
 });
 
 const Signup = props => {
-  const { currentUser, errorUser } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, errorUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +28,7 @@ const Signup = props => {
   useEffect (() => {
     if (currentUser) {
       reset();
-      props.history.push('/');
+      history.push('/');
     }
 
   },[currentUser]);
@@ -119,4 +120,4 @@ const Signup = props => {
     }
 
 
-export default withRouter(Signup);
+export default Signup;
