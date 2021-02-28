@@ -1,38 +1,61 @@
-import React,{Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React,{ useState, useEffect} from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { resetPassStart, resetStateUser } from './../../Redux/User/user.actions';
 import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
+<<<<<<< HEAD
 //import Alert from '@material-ui/lab/Alert';
+=======
+>>>>>>> 4c60ae6d4abace502ed2d2e53c044a87c59ebe28
 
-import { auth } from './../../firebase/utils';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
-const initialState = {
-    email: '',
-    errors: []
+const theme = createMuiTheme();
+
+theme.typography.h6 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.4rem',
+  },
 };
 
-class EmailPass extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            ...initialState
-        };
+const mapState = ({ user}) => ({
+    resetPassSuccess: user.resetPassSuccess,
+    errorUser: user.errorUser
+});
 
-        this.handleChange = this.handleChange.bind(this);
-    }
+const EmailPass = props => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { resetPassSuccess, errorUser } = useSelector(mapState);
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
 
-    handleChange(e){
-        const { name, value} = e.target;
-        this.setState ({
-            [name] : value
-        });
-    };
+    useEffect(() => {
+        if(resetPassSuccess) {
+            alert('Password reset successful. Please check your email');
+            dispatch(resetStateUser());
+            history.push('/login');
+        }
+    },[resetPassSuccess]);
 
-    handleSubmit = async (e) => {
+    useEffect(() => {
+        if (Array.isArray(errorUser) && errorUser.length > 0) {
+            setErrors(errorUser);
+        }
+        
+    },[errorUser]);
+
+    const handleSubmit = e => {
         e.preventDefault();
+<<<<<<< HEAD
 
         try{
             const{ email } = this.state;
@@ -58,12 +81,10 @@ class EmailPass extends Component {
         }catch(err){
             console.log(err);
         }
+=======
+        dispatch(resetPassStart({email}));
+>>>>>>> 4c60ae6d4abace502ed2d2e53c044a87c59ebe28
     }
-
-
-    render() {
-
-        const { email, errors } = this.state;
 
         const configAuth ={
             headLine: 'Forgot your password?'
@@ -71,6 +92,7 @@ class EmailPass extends Component {
 
         return (
             <WrapAuth {...configAuth}>
+                <ThemeProvider theme={theme}>
                 <Typography variant="body1" align="center">
                     Enter your email and we'll send you a link to reset your password
                 </Typography>
@@ -88,24 +110,27 @@ class EmailPass extends Component {
                         </Typography>
                     )}
 
-                    <form onSubmit = {this.handleSubmit}>
+                    <form onSubmit = {handleSubmit}>
 
                         <FormInput
                             type="email"
                             name="email"
                             value={email}
                             placeholder="Email"
-                            onChange={this.handleChange}
+                            handleChange={e => setEmail(e.target.value)}
                         />
 
                         <Button type="submit">
-                            Reset Password
+                            <Typography variant="h6">
+                                Reset Password
+                            </Typography>
                         </Button>
                     </form>
                 </div>
+                </ThemeProvider>
             </WrapAuth>
         );
     }
-}
 
-export default withRouter(EmailPass);
+
+export default EmailPass;
