@@ -4,7 +4,7 @@ import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
-import Alert from '@material-ui/lab/Alert';
+//import Alert from '@material-ui/lab/Alert';
 
 import { auth } from './../../firebase/utils';
 import { Typography } from '@material-ui/core';
@@ -49,7 +49,7 @@ class EmailPass extends Component {
                     this.props.history.push('/login');
                 })
                 .catch(() => {
-                    const err = ['Email does not exist. Please try again'];
+                    const err = ['Email does not exist. Please try again']
                     this.setState({
                         errors: err
                     });
