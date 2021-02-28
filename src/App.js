@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Route, Switch, Redirect } 
   from 'react-router-dom'; 
 import { setCurrentUser } from './Redux/User/user.actions';
@@ -27,7 +27,8 @@ import './default.scss';
 import { auth, handleUserProfile } from './firebase/utils';
 
 const App = props => {
-  const { setCurrentUser, currentUser } = props;
+  const dispatch = useDispatch();
+  // const { setCurrentUser, currentUser } = props;
 
   useEffect(() => {
       //to know that they are signed in or logged out
@@ -35,15 +36,15 @@ const App = props => {
         if (userAuth){
           const userRef = await handleUserProfile(userAuth);
           userRef.onSnapshot(snapshot => {
-            setCurrentUser({
+            dispatch(setCurrentUser({
               id: snapshot.id,
               ...snapshot.data()
-            });
+            }));
           })
         }
 
         //when the user is logged out
-        setCurrentUser(userAuth);
+        dispatch(setCurrentUser(userAuth));
       });
 
     return() => {
@@ -60,13 +61,14 @@ const App = props => {
               </HomeLayout>
             )}/> 
             {/* might have to ommit the current user condition */}
-            <Route exact path='/registration' render={() => currentUser ? <Redirect to="/"/> : (
+            {/* currentUser ? <Redirect to="/"/> : */}
+            <Route exact path='/registration' render={() =>  (
               <MainLayout>
                 <Registration />
               </MainLayout>
             )}/> 
              <Route exact path='/login' 
-              render={() =>   currentUser ? <Redirect to="/"/> : (
+              render={() =>  (
                 <MainLayout>
                   <Login />
                 </MainLayout>
@@ -99,13 +101,4 @@ const App = props => {
     );
   }
  
-
-const mapStateToProps = ({user }) => ({
-  currentUser: user.currentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

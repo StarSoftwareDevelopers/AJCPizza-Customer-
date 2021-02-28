@@ -1,17 +1,35 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
+import { signInUser, signInWithGoogle, resetAuthForms } from './../../Redux/User/user.actions';
+
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
-import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
 import WrapAuth from './../WrapAuth';
 
+const mapState = ({ user }) => ({
+    signInSuccess: user.signInSuccess
+}); //to get from the redux store 
+
 const SigninIn = props => {
+    const { signInSuccess } = useSelector(mapState);
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        //whenever signinsuccess is true
+        if (signInSuccess) {
+            resetForm();
+            dispatch(resetAuthForms());
+            props.history.push('/');
+        }
+
+    },[signInSuccess]); 
 
     const resetForm = () =>{
         setEmail('');
@@ -19,23 +37,13 @@ const SigninIn = props => {
         setErrors([]);
     };
 
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        try{
-            await auth.signInWithEmailAndPassword(email,password)
-            .then(()=> {
-              resetForm();
-              props.history.push('/');
-            })
-            .catch(()=> {
-                const err = ['Wrong Email or Password. Please try again.'];
-                setErrors(err);
-            });
-           
-            
-        }catch(err){
-            console.log(err);
-        }
+        dispatch(signInUser({ email, password }));   
+    }
+
+    const handleGoogleSignIn = () => {
+        dispatch(signInWithGoogle());
     }
 
     const configAuth ={
@@ -46,7 +54,7 @@ const SigninIn = props => {
             <WrapAuth {...configAuth} >
                         <div className="formWrap">
       
-                    {errors.length > 0 && (
+                    {/* {errors.length > 0 && (
                         <Typography color="error" align="center">
                             {errors.map((e, index) => {
                                 return (
@@ -56,7 +64,7 @@ const SigninIn = props => {
                                 );
                             })}
                         </Typography>
-                    )}
+                    )} */}
                             <form onSubmit={handleSubmit}>
 
                                 <FormInput  
@@ -94,7 +102,7 @@ const SigninIn = props => {
                                         <div className="row">
                                             
                                             {/* Put a google Icon after the <Button> */}
-                                            <Button onClick={signInWithGoogle}>
+                                            <Button onClick={handleGoogleSignIn}>
                                                 <Typography variant="h6" align="center" display="block">
                                                     {/* This styling could be enhanced in Button - styles.scss */}
                                                     Sign In With Google
@@ -102,13 +110,6 @@ const SigninIn = props => {
                                             </Button>
                                         </div>
                                     </div>
-
-                                   
-                                    {/* <Link to="/registration">
-                                        <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
-                                        Not yet Registered? Register here.
-                                        </Typography>
-                                    </Link> */}
                             </form>
                         </div>
             </WrapAuth>

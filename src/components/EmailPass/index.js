@@ -1,13 +1,13 @@
-import React,{ useState} from 'react';
+import React,{ useState, useEffect} from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { resetPassword, resetAuthForms } from './../../Redux/User/user.actions';
 import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
-import { auth } from './../../firebase/utils';
 import { Typography } from '@material-ui/core';
 
 const theme = createMuiTheme();
@@ -22,34 +22,35 @@ theme.typography.h6 = {
   },
 };
 
+const mapState = ({ user}) => ({
+    resetPasswordSuccess: user.resetPasswordSuccess,
+    resetPasswordError: user.resetPasswordError
+});
+
 const EmailPass = props => {
+    const { resetPasswordSuccess, resetPasswordError} = useSelector(mapState);
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try{
-            //the page you want to send the user to once they've reset the password
-            //pass the url for the live site or the domain site when the site has gone live 
-            const config = {
-                url: 'http://localhost:3000/login'  
-            };
-
-            await auth.sendPasswordResetEmail(email, config)
-                //specify what happens if successful
-                .then(() => {
-                    alert('Password reset successful. Please check your email');
-                    props.history.push('/login');
-                })
-                .catch(() => {
-                    const err = ['Email does not exist. Please try again'];
-                    setErrors(err);
-                });
-
-        }catch(err){
-            console.log(err);
+    useEffect(() => {
+        if(resetPasswordSuccess) {
+            alert('Password reset successful. Please check your email');
+            dispatch(resetAuthForms());
+            props.history.push('/login');
         }
+    },[resetPasswordSuccess]);
+
+    useEffect(() => {
+        if (Array.isArray(resetPasswordError) && resetPasswordError.length > 0) {
+            setErrors(resetPasswordError);
+        }
+        
+    },[resetPasswordError]);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(resetPassword({email}));
     }
 
         const configAuth ={
