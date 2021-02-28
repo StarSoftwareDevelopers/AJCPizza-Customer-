@@ -140,7 +140,9 @@ export default function PersistentDrawerLeft() {
                         aria-controls="menu-appbar"
                         className= {classes.title}
           >
-            AJC HOMEMADE PIZZA
+            <Link to="/admin">
+              AJC HOMEMADE PIZZA
+            </Link>
           </Typography>
           <div>
             <Typography noWrap variant="h5"

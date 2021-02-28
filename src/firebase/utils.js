@@ -10,15 +10,18 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 //utility function for the onclick event with the Sign in of Google button
-const GoogleProvider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = () => auth.signInWithPopup(GoogleProvider);
+export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+GoogleProvider.setCustomParameters( {prompt: 'select_account' });
+
+// export const FacebookProvdider = new firebase.auth.FacebookAuthProvider();
+// FacebookProvdider.setCustomParameters({prompt: 'select_account'});
 
 export const handleUserProfile = async (userAuth, additionalData) => {
     if (!userAuth) return;
     const {uid} = userAuth;
 
     const userRef = firestore.doc(`users/${uid}`);
-
+        
     //create new user
     const snapshot = await userRef.get();
     if (!snapshot.exists){
