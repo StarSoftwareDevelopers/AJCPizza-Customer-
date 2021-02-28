@@ -1,6 +1,6 @@
 //all redux actions 
 import UserTypes from './user.types';
-import { auth, handleUserProfile, GoogleProvider } from './../../firebase/utils';
+import { auth, handleUserProfile, GoogleProvider, } from './../../firebase/utils';
 
 export const setCurrentUser = user => ({
     type: UserTypes.SET_CURRENT_USER,
@@ -94,3 +94,4 @@ export const signInWithGoogle = () => async dispatch => {
     }
    
 };
+
