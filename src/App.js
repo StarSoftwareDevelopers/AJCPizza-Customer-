@@ -1,8 +1,7 @@
 import React,{useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {Route, Switch, Redirect } 
-  from 'react-router-dom'; 
-import { setCurrentUser } from './Redux/User/user.actions';
+import {Route, Switch } from 'react-router-dom'; 
+import { userAuthSession } from './Redux/User/user.actions';
 
 //HOC (Higher Order Component)
 import WithAuth from './HOC/withAuth';
@@ -24,33 +23,13 @@ import Home from './Admin/Pages/Home';
 
 import './default.scss';
 
-import { auth, handleUserProfile } from './firebase/utils';
-
 const App = props => {
   const dispatch = useDispatch();
-  // const { setCurrentUser, currentUser } = props;
-
+  
   useEffect(() => {
-      //to know that they are signed in or logged out
-    	const authListener = auth.onAuthStateChanged(async userAuth => {
-        if (userAuth){
-          const userRef = await handleUserProfile(userAuth);
-          userRef.onSnapshot(snapshot => {
-            dispatch(setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data()
-            }));
-          })
-        }
-
-        //when the user is logged out
-        dispatch(setCurrentUser(userAuth));
-      });
-
-    return() => {
-      authListener();
-    };
-  }, []);
+    dispatch(userAuthSession());
+    
+  },[]);
 
     return (
       <div className="App"> 
@@ -60,8 +39,6 @@ const App = props => {
                 <Homepage />
               </HomeLayout>
             )}/> 
-            {/* might have to ommit the current user condition */}
-            {/* currentUser ? <Redirect to="/"/> : */}
             <Route exact path='/registration' render={() =>  (
               <MainLayout>
                 <Registration />
@@ -100,5 +77,4 @@ const App = props => {
         </div>
     );
   }
- 
 export default App;

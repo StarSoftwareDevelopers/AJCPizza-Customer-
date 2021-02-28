@@ -2,53 +2,33 @@ import UserTypes from './user.types';
 
 const INITIAL_STATE ={
     currentUser: null,
-    signInSuccess: false,
-    signUpSuccess: false,
-    signUpError: [],
-    resetPasswordSuccess: false,
-    resetPasswordError: []
+    resetPassSuccess: false,
+    errorUser: []
 };
 
 const userReducer = (state=INITIAL_STATE, action) => {
    switch(action.type){
-       case UserTypes.SET_CURRENT_USER:
+       case UserTypes.SIGN_IN_SUCCESS:
            return {
                ...state,
-               currentUser: action.payload
+               currentUser: action.payload,
+               errorUser: []
            }
-        case UserTypes.SIGN_IN_SUCCESS:
+        case UserTypes.RESET_PASS_SUCCESS:
+            return{
+                ...state,
+                resetPassSuccess: action.payload
+            }
+        case UserTypes.ERROR_USER:
             return {
                 ...state,
-                signInSuccess: action.payload
+                errorUser: action.payload
             }
-        case UserTypes.SIGN_UP_SUCCESS:
+        case UserTypes.RESET_STATE_USER:
+        case UserTypes.SIGN_OUT_SUCCESS:
             return{
                 ...state,
-                signUpSuccess: action.payload
-            }
-        case UserTypes.SIGN_UP_ERROR:
-            return{
-                ...state,
-                signUpError: action.payload
-            }
-        case UserTypes.RESET_PASSWORD_SUCCESS:
-            return{
-                ...state,
-                resetPasswordSuccess: action.payload
-            }
-        case UserTypes.RESET_PASSWORD_ERROR:
-            return{
-                ...state,
-                RESET_PASSWORD_ERROR: action.payload
-            }
-        case UserTypes.RESET_AUTH_FORMS:
-            return{
-                ...state,
-                signInSuccess: false,
-                signUpSuccess: false,
-                signUpError: [],
-                resetPasswordSuccess: false,
-                resetPasswordError: []
+                ...INITIAL_STATE
             }
        default:
         return state;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { signUpUser, resetAuthForms } from './../../Redux/User/user.actions';
+import { useHistory } from 'react-router-dom';
+import { signUpStart } from './../../Redux/User/user.actions';
 
 import './styles.scss';
 import Typography from '@material-ui/core/Typography';
@@ -11,13 +11,14 @@ import Button from './../Forms/Button';
 import WrapAuth from './../WrapAuth';
 
 const mapState = ({ user }) => ({
-  signUpSuccess: user.signUpSuccess,
-  signUpError: user.signUpError
+  currentUser : user.currentUser,
+  errorUser: user.errorUser
 });
 
 const Signup = props => {
   const dispatch = useDispatch();
-  const { signUpSuccess, signUpError } = useSelector(mapState);
+  const history = useHistory();
+  const { currentUser, errorUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,20 +26,19 @@ const Signup = props => {
   const [errors, setErrors] = useState([]);
 
   useEffect (() => {
-    if (signUpSuccess) {
-      rest();
-      dispatch(resetAuthForms());
-      props.history.push('/');
+    if (currentUser) {
+      reset();
+      history.push('/');
     }
 
-  },[signUpSuccess]);
+  },[currentUser]);
 
   useEffect (() => {
-    if (Array.isArray(signUpError) && signUpError.length > 0) {
-      setErrors(signUpError);
+    if (Array.isArray(errorUser) && errorUser.length > 0) {
+      setErrors(errorUser);
     }
     
-  }, [signUpError]);
+  }, [errorUser]);
 
   const reset = () => {
     setdisplayName('');
@@ -50,7 +50,7 @@ const Signup = props => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    dispatch(signUpUser({ displayName,email, password, confirmPassword })); 
+    dispatch(signUpStart ({ displayName,email, password, confirmPassword })); 
    
   }
         const configAuth = {
@@ -120,4 +120,4 @@ const Signup = props => {
     }
 
 
-export default withRouter(Signup);
+export default Signup;
