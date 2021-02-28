@@ -1,74 +1,59 @@
-import React,{Component} from 'react';
+import React,{ useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {Link, useHistory} from 'react-router-dom';
+import { emailSignInStart, googleSignInStart } from './../../Redux/User/user.actions';
+
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
-import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
-import {Link} from 'react-router-dom';
 import WrapAuth from './../WrapAuth';
 
-const initialState = {
-    email: '',
-    password: '',
-    errors: []
-};
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser
+}); //to get from the redux store 
 
-class SigninIn extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            ...initialState
-        };
+const SigninIn = props => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { currentUser } = useSelector(mapState);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
 
-        this.handleChange = this.handleChange.bind(this);
-    }
+    useEffect(() => {
+        //whenever signinsuccess is true
+        if (currentUser) {
+            resetForm();
+            history.push('/');
+        }
 
-    handleChange(e) {
-        const { name, value } = e.target;
-        this.setState({
-            [name] : value
-        });
-    }
+    },[currentUser]); 
 
-    handleSubmit = async e => {
+    const resetForm = () =>{
+        setEmail('');
+        setPassword('');
+        setErrors([]);
+    };
+
+    const handleSubmit = e => {
         e.preventDefault();
-        const { email, password } = this.state;
-
-        try{
-          
-            await auth.signInWithEmailAndPassword(email,password)
-            .then(()=> {
-                this.setState({
-                    ...initialState
-                });
-            })
-            .catch(()=> {
-                const err = ['Wrong Email or Password. Please try again.'];
-                this.setState({
-                    errors: err
-                }); 
-            });
-           
-            
-        }catch(err){
-            console.log(err);
-        }
     }
 
-    render() {
+    const handleGoogleSignIn = () => {
+        dispatch(googleSignInStart());
+    }
 
-        const { email, password, errors} = this.state;
-
-        const configAuth ={
-            headLine: 'Log In'
-        }
+    const configAuth ={
+        headLine: 'Log In'
+    }
 
         return (
             <WrapAuth {...configAuth} >
                         <div className="formWrap">
-
-                            
-                    {errors.length > 0 && (
+      
+                    {/* {errors.length > 0 && (
                         <Typography color="error" align="center">
                             {errors.map((e, index) => {
                                 return (
@@ -78,15 +63,15 @@ class SigninIn extends Component {
                                 );
                             })}
                         </Typography>
-                    )}
-                            <form onSubmit={this.handleSubmit}>
+                    )} */}
+                            <form onSubmit={handleSubmit}>
 
                                 <FormInput  
                                     type="email"
                                     name="email"
                                     value={email}
                                     placeholder="Email"
-                                    handleChange = {this.handleChange}
+                                    handleChange = {e => setEmail(e.target.value)}
                                 />
 
                                 
@@ -95,9 +80,16 @@ class SigninIn extends Component {
                                     name="password"
                                     value={password}
                                     placeholder="Password"
-                                    handleChange = {this.handleChange}
+                                    handleChange = {e => setPassword(e.target.value)}
                                 />          
-
+                                <Link to="/recovery">
+                                        <Typography align="center" variant="subtitle1" display="block">
+                                            Forgot Password?
+                                        </Typography>
+                                    </Link>
+                             
+                                <Divider/> 
+                                <br></br>
                                 <Button type="submit">
                                     <Typography variant="h6" align="center" display="block">
                                         {/* This styling could be enhanced in Button - styles.scss */}
@@ -109,7 +101,7 @@ class SigninIn extends Component {
                                         <div className="row">
                                             
                                             {/* Put a google Icon after the <Button> */}
-                                            <Button onClick={signInWithGoogle}>
+                                            <Button onClick={handleGoogleSignIn}>
                                                 <Typography variant="h6" align="center" display="block">
                                                     {/* This styling could be enhanced in Button - styles.scss */}
                                                     Sign In With Google
@@ -117,23 +109,10 @@ class SigninIn extends Component {
                                             </Button>
                                         </div>
                                     </div>
-
-                                    <Link to="/recovery">
-                                        <Typography align="center" variant="subtitle1" display="block">
-                                            Forgot Password?
-                                        </Typography>
-                                    </Link>
-                                    {/* <Link to="/registration">
-                                        <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
-                                        Not yet Registered? Register here.
-                                        </Typography>
-                                    </Link> */}
                             </form>
                         </div>
             </WrapAuth>
-        )
+        );
     }
-   
-}
 
 export default SigninIn;

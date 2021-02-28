@@ -1,13 +1,13 @@
-import React,{Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React,{ useState, useEffect} from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { resetPassStart, resetStateUser } from './../../Redux/User/user.actions';
 import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
-import { auth } from './../../firebase/utils';
 import { Typography } from '@material-ui/core';
 
 const theme = createMuiTheme();
@@ -22,61 +22,37 @@ theme.typography.h6 = {
   },
 };
 
-const initialState = {
-    email: '',
-    errors: []
-};
+const mapState = ({ user}) => ({
+    resetPassSuccess: user.resetPassSuccess,
+    errorUser: user.errorUser
+});
 
-class EmailPass extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            ...initialState
-        };
+const EmailPass = props => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { resetPassSuccess, errorUser } = useSelector(mapState);
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
 
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e){
-        const { name, value} = e.target;
-        this.setState ({
-            [name] : value
-        });
-    };
-
-    handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try{
-            const{ email } = this.state;
-
-            //the page you want to send the user to once they've reset the password
-            //pass the url for the live site or the domain site when the site has gone live 
-            const config = {
-                url: 'http://localhost:3000/login'  
-            };
-
-            await auth.sendPasswordResetEmail(email, config)
-                //specify what happens if successful
-                .then(() => {
-                    this.props.history.push('/login');
-                })
-                .catch(() => {
-                    const err = ['Email does not exist. Please try again'];
-                    this.setState({
-                        errors: err
-                    });
-                });
-
-        }catch(err){
-            console.log(err);
+    useEffect(() => {
+        if(resetPassSuccess) {
+            alert('Password reset successful. Please check your email');
+            dispatch(resetStateUser());
+            history.push('/login');
         }
+    },[resetPassSuccess]);
+
+    useEffect(() => {
+        if (Array.isArray(errorUser) && errorUser.length > 0) {
+            setErrors(errorUser);
+        }
+        
+    },[errorUser]);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(resetPassStart({email}));
     }
-
-
-    render() {
-
-        const { email, errors } = this.state;
 
         const configAuth ={
             headLine: 'Forgot your password?'
@@ -102,14 +78,14 @@ class EmailPass extends Component {
                         </Typography>
                     )}
 
-                    <form onSubmit = {this.handleSubmit}>
+                    <form onSubmit = {handleSubmit}>
 
                         <FormInput
                             type="email"
                             name="email"
                             value={email}
                             placeholder="Email"
-                            onChange={this.handleChange}
+                            handleChange={e => setEmail(e.target.value)}
                         />
 
                         <Button type="submit">
@@ -123,6 +99,6 @@ class EmailPass extends Component {
             </WrapAuth>
         );
     }
-}
 
-export default withRouter(EmailPass);
+
+export default EmailPass;

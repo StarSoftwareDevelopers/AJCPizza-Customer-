@@ -1,14 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {signOutUserStart} from './../../Redux/User/user.actions';
 import Logo from './../../assets/AJC Pizza Logo.png';
 import './style.scss';
 import {Link} from 'react-router-dom';
-import { auth } from './../../firebase/utils';
+
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser
+});
 
 const Header = props => {
+    const dispatch = useDispatch();
+    const{currentUser } = useSelector(mapState);
 
-    const{currentUser } = props;
-
+    const signOut = () => {
+        dispatch(signOutUserStart());
+    };
 
     return (
         <header className="header">
@@ -23,9 +30,17 @@ const Header = props => {
                         {currentUser && (
                             <ul>
                                 <li>
-                                    {/* You can change the Button to <span> based from the video. Button is taken
-                                    from material UI */}
-                                    <span onClick={() => auth.signOut()}>
+                                    <Link to="/dashboardC">
+                                        Order Status
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/account">
+                                        My Account
+                                    </Link>
+                                </li>
+                                <li>
+                                    <span onClick={() => signOut()}>
                                         Logout
                                     </span>
                                 </li>
@@ -58,8 +73,6 @@ Header.defaultProps = {
     currentUser: null
 };
 
-const mapStateToProps = ({ user }) => ({
-    currentUser: user.currentUser
-});
 
-export default connect(mapStateToProps, null)(Header);
+
+export default Header;
