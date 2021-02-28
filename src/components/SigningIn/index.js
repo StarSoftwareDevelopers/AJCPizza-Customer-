@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 import { signInWithGoogle,auth } from './../../firebase/utils';
 import FormInput from './../Forms/FormInput';
@@ -74,7 +75,14 @@ const SigninIn = props => {
                                     placeholder="Password"
                                     handleChange = {e => setPassword(e.target.value)}
                                 />          
-
+                                <Link to="/recovery">
+                                        <Typography align="center" variant="subtitle1" display="block">
+                                            Forgot Password?
+                                        </Typography>
+                                    </Link>
+                             
+                                <Divider/>
+                                <br></br>
                                 <Button type="submit">
                                     <Typography variant="h6" align="center" display="block">
                                         {/* This styling could be enhanced in Button - styles.scss */}
@@ -95,11 +103,7 @@ const SigninIn = props => {
                                         </div>
                                     </div>
 
-                                    <Link to="/recovery">
-                                        <Typography align="center" variant="subtitle1" display="block">
-                                            Forgot Password?
-                                        </Typography>
-                                    </Link>
+                                   
                                     {/* <Link to="/registration">
                                         <Typography variant="h6" align="center" display="block" style={{marginTop: '.5rem'}}>
                                         Not yet Registered? Register here.
