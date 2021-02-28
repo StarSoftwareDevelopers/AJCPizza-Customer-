@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
-import { signInUser, signInWithGoogle, resetAuthForms } from './../../Redux/User/user.actions';
+import { emailSignInStart, googleSignInStart } from './../../Redux/User/user.actions';
 
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
@@ -11,11 +11,11 @@ import FormInput from './../Forms/FormInput';
 import WrapAuth from './../WrapAuth';
 
 const mapState = ({ user }) => ({
-    signInSuccess: user.signInSuccess
+    currentUser: user.currentUser
 }); //to get from the redux store 
 
 const SigninIn = props => {
-    const { signInSuccess } = useSelector(mapState);
+    const { currentUser } = useSelector(mapState);
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,13 +23,12 @@ const SigninIn = props => {
 
     useEffect(() => {
         //whenever signinsuccess is true
-        if (signInSuccess) {
+        if (currentUser) {
             resetForm();
-            dispatch(resetAuthForms());
             props.history.push('/');
         }
 
-    },[signInSuccess]); 
+    },[currentUser]); 
 
     const resetForm = () =>{
         setEmail('');
@@ -39,11 +38,11 @@ const SigninIn = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(signInUser({ email, password }));   
+        dispatch(emailSignInStart({ email, password }));   
     }
 
     const handleGoogleSignIn = () => {
-        dispatch(signInWithGoogle());
+        dispatch(googleSignInStart());
     }
 
     const configAuth ={

@@ -1,18 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {signOutUserStart} from './../../Redux/User/user.actions';
 import Logo from './../../assets/AJC Pizza Logo.png';
 import './style.scss';
 import {Link} from 'react-router-dom';
-import { auth } from './../../firebase/utils';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
 });
 
 const Header = props => {
-
+    const dispatch = useDispatch();
     const{currentUser } = useSelector(mapState);
 
+    const signOut = () => {
+        dispatch(signOutUserStart());
+    };
 
     return (
         <header className="header">
@@ -37,9 +40,7 @@ const Header = props => {
                                     </Link>
                                 </li>
                                 <li>
-                                    {/* You can change the Button to <span> based from the video. Button is taken
-                                    from material UI */}
-                                    <span onClick={() => auth.signOut()}>
+                                    <span onClick={() => signOut()}>
                                         Logout
                                     </span>
                                 </li>
