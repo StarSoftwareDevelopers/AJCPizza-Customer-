@@ -89,7 +89,7 @@ const SigninIn = props => {
                                         </Typography>
                                     </Link>
                              
-                                <Divider/>
+                                <Divider/> 
                                 <br></br>
                                 <Button type="submit">
                                     <Typography variant="h6" align="center" display="block">

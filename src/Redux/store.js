@@ -1,12 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
+import createSagaMiddleWare from 'redux-saga';
 
 import reducerRoot from './reducerRoot';
 
-export const middleWares = [thunk,logger];
+// const sagaMiddleware = createSagaMiddleWare();
+// sagaMiddleware,
+export const middleWares = [thunk, logger];
 
 export const store = createStore(reducerRoot, applyMiddleware(...middleWares),); 
+// sagaMiddleware.run();
 
 // import { createStore, applyMiddleware, compose } from 'redux';
 // import logger from 'redux-logger';
