@@ -13,8 +13,8 @@ export const firestore = firebase.firestore();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters( {prompt: 'select_account' });
 
-// export const FacebookProvdider = new firebase.auth.FacebookAuthProvider();
-// FacebookProvdider.setCustomParameters({prompt: 'select_account'});
+export const FacebookProvider = new firebase.auth.FacebookAuthProvider();
+FacebookProvider.setCustomParameters({prompt: 'select_account'});
 
 export const handleUserProfile = async ({userAuth, additionalData}) => {
     if (!userAuth) return;
