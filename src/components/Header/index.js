@@ -31,7 +31,7 @@ const Header = props => {
                             <ul>
                                 <li>
                                     <Link to="/dashboardC">
-                                        Order Status
+                                        Order
                                     </Link>
                                 </li>
                                 <li>

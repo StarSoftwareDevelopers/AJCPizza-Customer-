@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.scss';
+import {Link} from 'react-router-dom';
 
 import PizzaWelcome from './../../assets/pizzacarousel.png';
 const Directory = props => {
@@ -16,7 +17,9 @@ const Directory = props => {
                 <items>
                 <h1>AJC Homemade Pizza</h1>
                 <p>The Best Pizza in Ayala</p>
-                <a>Order Now</a>
+                <Link to ="/dashboardC">
+                    Order Now
+                </Link>
                 </items>
             </content>
                 </div>
