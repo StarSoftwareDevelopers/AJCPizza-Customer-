@@ -6,10 +6,6 @@ import './styles.scss';
 import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
-<<<<<<< HEAD
-//import Alert from '@material-ui/lab/Alert';
-=======
->>>>>>> 4c60ae6d4abace502ed2d2e53c044a87c59ebe28
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -55,35 +51,7 @@ const EmailPass = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-<<<<<<< HEAD
-
-        try{
-            const{ email } = this.state;
-
-            //the page you want to send the user to once they've reset the password
-            //pass the url for the live site or the domain site when the site has gone live 
-            const config = {
-                url: 'http://localhost:3000/login'  
-            };
-
-            await auth.sendPasswordResetEmail(email, config)
-                //specify what happens if successful
-                .then(() => {
-                    this.props.history.push('/login');
-                })
-                .catch(() => {
-                    const err = ['Email does not exist. Please try again']
-                    this.setState({
-                        errors: err
-                    });
-                });
-
-        }catch(err){
-            console.log(err);
-        }
-=======
         dispatch(resetPassStart({email}));
->>>>>>> 4c60ae6d4abace502ed2d2e53c044a87c59ebe28
     }
 
         const configAuth ={

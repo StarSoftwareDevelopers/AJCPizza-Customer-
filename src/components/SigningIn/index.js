@@ -39,30 +39,6 @@ const SigninIn = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-<<<<<<< HEAD
-        const { email, password } = this.state;
-
-        try{
-          
-            await auth.signInWithEmailAndPassword(email,password)
-            .then(()=> {
-                this.setState({
-                    ...initialState
-                });
-            })
-            .catch(()=> {
-                const err = ['Wrong Email or Password. Please try again.'];
-                this.setState({
-                    errors: err
-                }); 
-            });
-           
-            
-        }catch(err){
-            console.log(err);
-        }
-=======
->>>>>>> 4c60ae6d4abace502ed2d2e53c044a87c59ebe28
     }
 
     const handleGoogleSignIn = () => {

@@ -4,6 +4,7 @@ import './style.scss';
 import {
     FaFacebook,
     FaInstagram,
+    FaInstagramSquare,
     FaTwitter
 } from 'react-icons/fa';
 
@@ -25,17 +26,19 @@ const Footer = props => {
                <SocialMedia>
                    <SocialMediaWrap>
                        <SocialLogo>
-                       <img src={Logo} alt="AJC Logo" />
+                       <img src={Logo} alt="AJC Logo"/>
                        </SocialLogo>
+                       <SocialIcons>
                        <SocialIconsLink href="/" target="_blank" aria-label="Facebook" rel="moopener noreferrer">
                            <FaFacebook />
                        </SocialIconsLink>
                        <SocialIconsLink href="/" target="_blank" aria-label="Instagram" rel="moopener noreferrer">
-                           <FaFacebook />
+                           <FaInstagram />
                        </SocialIconsLink>
                        <SocialIconsLink href="/" target="_blank" aria-label="Twitter" rel="moopener noreferrer">
-                           <FaFacebook />
+                           <FaTwitter />
                        </SocialIconsLink>
+                       </SocialIcons>
                    </SocialMediaWrap>
                </SocialMedia>
            </FooterWrap>
@@ -46,3 +49,18 @@ const Footer = props => {
 }
 
 export default Footer;
+
+/*import React from 'react';
+import './style.scss';
+
+const Footer = props => {
+    return (
+        <footer className="footr">
+            <div className="wrap">
+                AJC Pizza
+            </div>
+        </footer>
+    );
+}
+
+export default Footer;*/
