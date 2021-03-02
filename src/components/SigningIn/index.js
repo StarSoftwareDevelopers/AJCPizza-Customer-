@@ -39,7 +39,6 @@ const SigninIn = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(emailSignInStart({ email, password }));   
     }
 
     const handleGoogleSignIn = () => {
