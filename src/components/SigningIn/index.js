@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import { emailSignInStart, googleSignInStart } from './../../Redux/User/user.actions';
+import { emailSignInStart, googleSignInStart, facebookSignInStart } from './../../Redux/User/user.actions';
 
 import './style.scss';
 import Typography from '@material-ui/core/Typography';
@@ -44,6 +44,10 @@ const SigninIn = props => {
 
     const handleGoogleSignIn = () => {
         dispatch(googleSignInStart());
+    }
+
+    const handleFacebookSignIn = () => {
+        dispatch(facebookSignInStart());
     }
 
     const configAuth ={
@@ -89,7 +93,7 @@ const SigninIn = props => {
                                         </Typography>
                                     </Link>
                              
-                                <Divider/> 
+                           
                                 <br></br>
                                 <Button type="submit">
                                     <Typography variant="h6" align="center" display="block">
@@ -97,15 +101,24 @@ const SigninIn = props => {
                                         Log In
                                     </Typography>
                                 </Button>
-
+                           
                                     <div className="socialSignin">
                                         <div className="row">
-                                            
+                                        <Divider/> 
+                                        <Typography variant="subtitle2" align="center" display="block">
+                                                   or
+                                        </Typography>
+
                                             {/* Put a google Icon after the <Button> */}
                                             <Button onClick={handleGoogleSignIn}>
                                                 <Typography variant="h6" align="center" display="block">
-                                                    {/* This styling could be enhanced in Button - styles.scss */}
                                                     Sign In With Google
+                                                </Typography>
+                                            </Button>
+                        
+                                            <Button onClick={handleFacebookSignIn} style={{backgroundColor: '#3b5998'}}>
+                                                <Typography variant="h6" align="center" display="block">
+                                                    Sign In With Facebook
                                                 </Typography>
                                             </Button>
                                         </div>
