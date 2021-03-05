@@ -51,3 +51,7 @@ export const resetStateUser = () => ({
 export const googleSignInStart = () => ({
     type: UserTypes.GOOGLE_SIGN_IN_START
 });
+
+export const facebookSignInStart = () => ({
+    type: UserTypes.FACEBOOK_SIGN_IN_START
+});
