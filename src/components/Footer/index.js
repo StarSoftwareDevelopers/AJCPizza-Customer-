@@ -4,7 +4,6 @@ import './style.scss';
 import {
     FaFacebook,
     FaInstagram,
-    FaInstagramSquare,
     FaTwitter
 } from 'react-icons/fa';
 
