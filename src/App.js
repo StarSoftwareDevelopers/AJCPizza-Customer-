@@ -17,9 +17,12 @@ import Recovery from './pages/Recovery';
 import Login from './pages/Login';
 import DashboardC from './pages/Dashboard';
 import UserProfile from './pages/UserProfile/UserProfile';
+import Cart from './pages/Cart';
+import About from './pages/About';
 
 import AppBar from './Admin/AdminComponents/AppBar';
 import Home from './Admin/Pages/Home';
+
 
 import './default.scss';
 
@@ -50,6 +53,12 @@ const App = props => {
                   <Login />
                 </MainLayout>
               )}/> 
+               <Route exact path='/about' 
+              render={() =>  (
+                <MainLayout>
+                  <About/>
+                </MainLayout>
+              )}/> 
               <Route exact path='/recovery' render={() => (
                 <MainLayout>
                   <Recovery/>
@@ -69,7 +78,13 @@ const App = props => {
                   </MainLayout>
                 </WithAuth>
               )}/>    
-              
+                <Route exact path='/cart' render={() => (
+                 <WithAuth>
+                  <MainLayout>
+                    <Cart/>
+                  </MainLayout>
+                </WithAuth>
+              )}/>    
             <AppBar/>
             <Route exact path="admin" component={Home}/>  
         </Switch>
